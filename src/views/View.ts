@@ -17,6 +17,8 @@ export abstract class View<T extends Model<K>, K> {
     return {};
   }
 
+  onRender(): void {} //oprional method for nesting views
+
   bindModel(): void {
     this.model.on('change', () => {
       this.render();
@@ -56,6 +58,8 @@ export abstract class View<T extends Model<K>, K> {
 
     this.bindEvents(templateEl.content);
     this.mapRegions(templateEl.content);
+
+    this.onRender();
 
     this.parent.append(templateEl.content);
   }
